@@ -58,6 +58,19 @@ const controller = {
     */
     getAdd: function(req, res) {
         // your code here
+        // create transaction document object
+        let trans = {
+            name: req.query.name,
+            refno: req.query.refno,
+            amount: req.query.amount
+        }
+
+        db.insertOne(Transaction, trans, function(flag) {
+            // Checks if inserting of new document is a success
+            if(flag) {
+                res.send(trans); // send back the inserted transaction object
+            }
+        });
     },
 
     /*
