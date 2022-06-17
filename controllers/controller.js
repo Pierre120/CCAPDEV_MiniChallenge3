@@ -81,6 +81,13 @@ const controller = {
     */
     getDelete: function (req, res) {
         // your code here
+        //  Reference number
+        let refno = req.query.refno;
+
+        // Delete one document
+        db.deleteOne(Transaction, { refno: refno }, function(isSuccess) {
+            res.send(isSuccess); // send if deleting of document is a success
+        });
     }
 
 }
