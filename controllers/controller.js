@@ -24,7 +24,7 @@ const controller = {
         db.findMany(Transaction, query, projection, function(docs) {
             // No existing documents in the Transactions collection
             if(docs == null) {
-                res.render('index'); // This is to load the page initially
+                res.render('index', { transactions: [] }); // This is to load the page initially
             }
             else {
                 res.render('index', { transactions: docs }); // Load the page with all transactions
