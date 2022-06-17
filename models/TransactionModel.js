@@ -8,6 +8,19 @@ var mongoose = require('mongoose');
 
 var TransactionSchema = new mongoose.Schema({
     // your code here
+    name: {
+        type: String,
+        required: true
+    },
+    refno: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    amount: {
+        type: Number,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);
