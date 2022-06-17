@@ -54,6 +54,39 @@ $(document).ready(function () {
     */
     $('#submit').click(function () {
         // your code here
+        // Retrieve form inputs
+        let newName = $('#name').val();
+        let newRefno = $('#refno').val();
+        let newAmount = $('#amount').val();
+        // Create transaction object
+        let newTransaction = {
+            name: newName,
+            refno: newRefno,
+            amount: newAmount
+        }
+
+        // Reset form and error message
+        $('#name').val('');
+        $('#refno').val('');
+        $('#amount').val('');
+        $('#error').text('');
+
+        // Check for empty fields
+        if(newName == '' || newRefno == '' || newAmount == '') {
+            $('#error').text('Fill up all fields');
+            return;
+        }
+
+        // Asynchronously communicate with server with adding new transaction
+        $.get('/add', newTransaction, function(flag) {
+            if(flag) {
+                let template = $('#card-template').html(); // Get the template of card.hbs partial
+                let transactionCard = Handlebars.compile(template); // compiles the template
+                transactionCard = transactionCard(newTransaction); // pass the data to the new transaction card
+                $('#cards').append(transactionCard); // append to the #cards element
+            }
+        });
+
     });
 
     /*
