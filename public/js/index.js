@@ -19,6 +19,21 @@ $(document).ready(function () {
     */
     $('#refno').keyup(function () {
         // your code here
+        // Get reference number
+        let refno = $('#refno').val();
+
+        $.get('/getCheckRefNo', { refno: refno }, function(result) {
+            if(result.refno == refno) {
+                $('#refno').css('background-color', 'red');
+                $('#error').text('Reference number already in the database');
+                $('#submit').prop('disabled', true);
+            }
+            else {
+                $('#refno').css('background-color', '#E3E3E3');
+                $('#error').text('');
+                $('#submit').prop('disabled', false);
+            }
+        });
     });
 
     /*
