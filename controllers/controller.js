@@ -23,7 +23,7 @@ const controller = {
         // retrieve all the documents
         db.findMany(Transaction, query, projection, function(docs) {
             // No existing documents in the Transactions collection
-            if(docs === null) {
+            if(docs == null) {
                 res.render('index'); // This is to load the page initially
             }
             else {
@@ -41,6 +41,13 @@ const controller = {
     */
     getCheckRefNo: function(req, res) {
         // your code here
+        //  Reference number
+        let refno = req.query.refno;
+
+        // find if `refno` already exists in the database
+        db.findOne(Transaction, { refno: refno }, 'refno', function(result) {
+            res.send(result);
+        });
     },
 
     /*
