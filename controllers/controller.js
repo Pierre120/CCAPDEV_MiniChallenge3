@@ -27,7 +27,7 @@ const controller = {
                 res.render('index'); // This is to load the page initially
             }
             else {
-                res.render('index', docs); // Load the page with all transactions
+                res.render('index', { transactions: docs }); // Load the page with all transactions
             }
         });
     },
