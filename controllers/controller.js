@@ -14,7 +14,22 @@ const controller = {
     */
     getIndex: function(req, res) {
         // your code here
-        res.render('index'); // This is to load the page initially
+        // query to get all documents
+        let query = {};
+
+        // fields to be returned
+        let projection = 'name refno amount';
+
+        // retrieve all the documents
+        db.findMany(Transaction, query, projection, function(docs) {
+            // No existing documents in the Transactions collection
+            if(docs === null) {
+                res.render('index'); // This is to load the page initially
+            }
+            else {
+                res.render('index', docs); // Load the page with all transactions
+            }
+        });
     },
 
     /*
