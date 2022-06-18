@@ -18,7 +18,7 @@ var TransactionSchema = new mongoose.Schema({
         unique: true
     },
     amount: {
-        type: Number,
+        type: String,
         required: true
     }
 });

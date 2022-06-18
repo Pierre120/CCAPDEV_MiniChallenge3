@@ -14,21 +14,15 @@ const controller = {
     */
     getIndex: function(req, res) {
         // your code here
-        // query to get all documents
-        let query = {};
+        // query to get all necessary documents
+        let query = req.query;
 
         // fields to be returned
         let projection = 'name refno amount';
 
         // retrieve all the documents
         db.findMany(Transaction, query, projection, function(docs) {
-            // No existing documents in the Transactions collection
-            if(docs == null) {
-                res.render('index', { transactions: [] }); // This is to load the page initially
-            }
-            else {
-                res.render('index', { transactions: docs }); // Load the page with all transactions
-            }
+            res.render('index', { transactions: docs }); // This is to load the page initially
         });
     },
 
@@ -66,9 +60,21 @@ const controller = {
         }
 
         db.insertOne(Transaction, trans, function(flag) {
-            // Checks if inserting of new document is a success
+            // Check if inserting of new document is successful
             if(flag) {
-                res.send(trans); // send back the inserted transaction object
+                res.render('partials/card', {
+                    name: trans.name,
+                    refno: trans.refno,
+                    amount: trans.amount
+                }, function (err, html) {
+                    if(err) {
+                        console.log(err);
+                        res.send('');
+                    } else {
+                        console.log(html);
+                        res.send(html);
+                    }
+                });
             }
         });
     },

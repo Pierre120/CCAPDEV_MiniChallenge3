@@ -78,15 +78,12 @@ $(document).ready(function () {
         }
 
         // Asynchronously communicate with server with adding new transaction
-        $.get('/add', newTransaction, function(flag) {
-            if(flag) {
-                let template = $('#card-template').html(); // Get the template of card.hbs partial
-                let transactionCard = Handlebars.compile(template); // compiles the template
-                transactionCard = transactionCard(newTransaction); // pass the data to the new transaction card
-                $('#cards').append(transactionCard); // append to the #cards element
+        $.get('/add', newTransaction, function(card) {
+            console.log(card);
+            if(card != '') {
+                $('#cards').append(card);
             }
         });
-
     });
 
     /*
