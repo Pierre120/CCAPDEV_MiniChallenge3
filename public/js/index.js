@@ -102,8 +102,6 @@ $(document).ready(function () {
         // Get the card to be removed
         let card = $(this).parent();
 
-        console.log(card);
-
         // Delete the transaction in the database
         $.get('/delete', {refno: refno}, function(flag) {
             // Checks if delete is successful
