@@ -27,14 +27,9 @@
             -->
             <div id="cards">
             <!-- your code here -->
-            {{#each transactions}}
-                {{> card name=name refno=refno amount=amount }}
-            {{/each}}
-
-            <!-- Template of card.hbs partial for appending -->
-            <script id="card-template" type="text/x-handlebars-template">
-                {{> card }}
-            </script>
+                {{#each transactions}}
+                    {{> card name=name refno=refno amount=amount }}
+                {{/each}}
             </div>
             
         </div>
