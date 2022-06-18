@@ -73,7 +73,7 @@ $(document).ready(function () {
 
         // Check for empty fields
         if(newName == '' || newRefno == '' || newAmount == '') {
-            $('#error').text('Fill up all fields');
+            $('#error').text('Fill up all fields.');
             return;
         }
 
