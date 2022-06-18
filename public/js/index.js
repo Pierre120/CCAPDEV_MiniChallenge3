@@ -79,7 +79,7 @@ $(document).ready(function () {
 
         // Asynchronously communicate with server with adding new transaction
         $.get('/add', newTransaction, function(card) {
-            console.log(card);
+            
             if(card != '') {
                 $('#cards').append(card);
             }
@@ -95,21 +95,21 @@ $(document).ready(function () {
     */
     $('#cards').on('click', '.remove', function () {
         // your code here
-        // Get the info of the transaction to be deleted
-        let data = $(this).siblings("div.info")[0].children("p.text");
-        // Create the transaction object to be deleted
-        let toDelete = {
-            name: data[0],
-            refno: data[1],
-            amount: data[2].slice(4)
-        };
+        // Get the element info of the transaction to be deleted
+        let elem = $(this).siblings("div.info").children("p.text")[1];
+        // Get the refno
+        let refno = $(elem).text().trim();
+        // Get the card to be removed
+        let card = $(this).parent();
+
+        console.log(card);
 
         // Delete the transaction in the database
-        $.get('/delete', toDelete, function(flag) {
+        $.get('/delete', {refno: refno}, function(flag) {
             // Checks if delete is successful
             if(flag) {
-                // Removes the current `.remove` parent (transaction card element)
-                $(this).parent().remove();
+                // Removes the transaction card
+                $(card).remove();
             }
         })
     });

@@ -71,7 +71,6 @@ const controller = {
                         console.log(err);
                         res.send('');
                     } else {
-                        console.log(html);
                         res.send(html);
                     }
                 });
