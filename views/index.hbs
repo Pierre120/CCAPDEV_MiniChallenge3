@@ -30,11 +30,13 @@
             {{#each transactions}}
                 {{> card name=name refno=refno amount=amount }}
             {{/each}}
-            </div>
 
+            <!-- Template of card.hbs partial for appending -->
             <script id="card-template" type="text/x-handlebars-template">
                 {{> card }}
             </script>
+            </div>
+            
         </div>
     </div>
 </body>
